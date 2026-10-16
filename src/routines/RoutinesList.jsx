@@ -1,0 +1,13 @@
+export default function RoutinesList({ routines }) {
+  return (
+    <ul>
+      {routines.map((routine) => (
+        <RoutineListItem key={routine.id} routine={routine} />
+      ))}
+    </ul>
+  );
+}
+
+function RoutineListItem({ routine }) {
+  return <li>{routine.name}</li>;
+}

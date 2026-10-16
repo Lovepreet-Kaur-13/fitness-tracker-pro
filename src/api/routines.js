@@ -12,6 +12,18 @@ export async function getRoutines() {
   }
 }
 
+/** Fetch the single routine */
+export async function getRoutine(id) {
+  try {
+    const response = await fetch(API + "/routines/" + id);
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}
+
 /**
  * Sends a new routine to the API to be created.
  * A valid token is required.

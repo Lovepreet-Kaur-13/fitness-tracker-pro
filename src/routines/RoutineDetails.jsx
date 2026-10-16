@@ -3,6 +3,7 @@ import { deleteRoutine, getRoutine } from "../api/routines";
 import { useNavigate, useParams } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 import { SetsList } from "../sets/setsList";
+import SetsForm from "../sets/SetsForm";
 
 export default function RoutineDetails() {
   const { token } = useAuth();
@@ -40,10 +41,12 @@ export default function RoutineDetails() {
       <h2>{routine.name}</h2>
       <p>{routine.goal}</p>
       <p>This routine is created by {routine.creatorName}</p>
-      <h3>Sets</h3>
-      <SetsList sets={routine.sets} />
       {token && <button onClick={tryDeleteRoutine}>Delete</button>}
       {error && <p role="alert">{error}</p>}
+
+      <h3>Sets</h3>
+      <SetsList sets={routine.sets} />
+      {token && <SetsForm />}
     </>
   );
 }

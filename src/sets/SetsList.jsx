@@ -6,7 +6,7 @@ export function SetsList({ sets }) {
       ))}
     </ul>
   ) : (
-    <p>This routine doesn't have any sets. Add one?</p>
+    <p>This routine doesnt have any sets. Add one?</p>
   );
 }
 

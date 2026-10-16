@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { deleteRoutine, getRoutine } from "../api/routines";
 import { useNavigate, useParams } from "react-router";
 import { useAuth } from "../auth/AuthContext";
+import { SetsList } from "../sets/setsList";
 
 export default function RoutineDetails() {
   const { token } = useAuth();
@@ -40,15 +41,7 @@ export default function RoutineDetails() {
       <p>{routine.goal}</p>
       <p>This routine is created by {routine.creatorName}</p>
       <h3>Sets</h3>
-      {
-        <ul>
-          {routine.sets.map((set) => (
-            <li key={id}>
-              {set.name} × {set.count}
-            </li>
-          ))}
-        </ul>
-      }
+      <SetsList sets={routine.sets} />
       {token && <button onClick={tryDeleteRoutine}>Delete</button>}
       {error && <p role="alert">{error}</p>}
     </>

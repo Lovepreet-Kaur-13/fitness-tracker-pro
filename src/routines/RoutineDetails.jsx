@@ -40,6 +40,7 @@ export default function RoutineDetails() {
       <p>{routine.goal}</p>
       <p>This routine is created by {routine.creatorName}</p>
       {token && <button onClick={tryDeleteRoutine}>Delete</button>}
+      {error && <p role="alert">{error}</p>}
     </>
   );
 }

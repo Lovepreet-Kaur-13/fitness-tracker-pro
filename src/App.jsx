@@ -6,6 +6,7 @@ import ActivitiesPage from "./activities/ActivitiesPage";
 import Error404 from "./Error404.jsx";
 import ActivityDetails from "./activities/ActivityDetails.jsx";
 import RoutinesPage from "./routines/RoutinesPage.jsx";
+import RoutineDetails from "./routines/RoutineDetails.jsx";
 // import { useNavigate } from "react-router";
 
 /**
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/activities/:id" element={<ActivityDetails />}></Route>
         <Route path="/routines" element={<RoutinesPage />}></Route>
+        <Route path="/routines/:id" element={<RoutineDetails />}></Route>
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>

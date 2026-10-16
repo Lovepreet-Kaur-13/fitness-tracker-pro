@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function RoutinesList({ routines }) {
   return (
     <ul>
@@ -9,5 +11,9 @@ export default function RoutinesList({ routines }) {
 }
 
 function RoutineListItem({ routine }) {
-  return <li>{routine.name}</li>;
+  return (
+    <li>
+      <Link to={"/routines/" + routine.id}>{routine.name}</Link>
+    </li>
+  );
 }

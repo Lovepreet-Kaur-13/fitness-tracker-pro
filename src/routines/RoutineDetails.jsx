@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { getRoutine } from "../api/routines";
-import { useParams } from "react-router";
+import { deleteRoutine, getRoutine } from "../api/routines";
+import { useNavigate, useParams } from "react-router";
+import { useAuth } from "../auth/AuthContext";
 
 export default function RoutineDetails() {
+  const { token } = useAuth();
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [error, setError] = useState(null);
   const [routine, setRoutine] = useState();
   console.log(routine);
 
@@ -16,6 +20,16 @@ export default function RoutineDetails() {
     syncRoutine(id);
   }, [id]);
 
+  const tryDeleteRoutine = async () => {
+    setError(null);
+    try {
+      await deleteRoutine(token, routine.id);
+      navigate("/routines");
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
   if (!routine) {
     return <p>Loading..</p>;
   }
@@ -25,6 +39,7 @@ export default function RoutineDetails() {
       <h2>{routine.name}</h2>
       <p>{routine.goal}</p>
       <p>This routine is created by {routine.creatorName}</p>
+      {token && <button onClick={tryDeleteRoutine}>Delete</button>}
     </>
   );
 }

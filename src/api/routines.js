@@ -47,3 +47,22 @@ export async function createRoutine(token, routine) {
     throw Error(result.message);
   }
 }
+
+/* Delete Routine */
+
+export async function deleteRoutine(token, id) {
+  if (!token) {
+    throw new Error("You must signed in to create an routine");
+  }
+
+  const response = await fetch(API + "/routines/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  if (!response.ok) {
+    const result = await response.json();
+    throw Error(result.message);
+  }
+}

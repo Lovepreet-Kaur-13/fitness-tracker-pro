@@ -21,7 +21,7 @@ export default function RoutinesPage() {
     <>
       <h1>Routines</h1>
       <RoutinesList routines={routines} syncRoutines={syncRoutines} />
-      {token && <RoutineForm />}
+      {token && <RoutineForm syncRoutines={syncRoutines} />}
     </>
   );
 }

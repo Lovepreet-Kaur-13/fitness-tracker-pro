@@ -1,8 +1,27 @@
-export default function RoutineForm() {
+import { useState } from "react";
+import { useAuth } from "../auth/AuthContext";
+import { createRoutine } from "../api/routines";
+
+export default function RoutineForm({ syncRoutines }) {
+  const { token } = useAuth();
+  const [error, setError] = useState(null);
+
+  const tryCreateRoutine = async (formData) => {
+    setError(null);
+    const name = formData.get("name");
+    const goal = formData.get("goal");
+    try {
+      await createRoutine(token, { name, goal });
+      syncRoutines();
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
   return (
     <>
       <h2>Add a new routine</h2>
-      <form>
+      <form action={tryCreateRoutine}>
         <label>
           Name
           <input type="text" name="name" />
@@ -13,6 +32,7 @@ export default function RoutineForm() {
         </label>
         <button>Add routine</button>
       </form>
+      {error && <p role="alert">{error}</p>}
     </>
   );
 }

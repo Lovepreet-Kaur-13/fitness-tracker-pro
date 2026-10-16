@@ -11,3 +11,27 @@ export async function getRoutines() {
     return [];
   }
 }
+
+/**
+ * Sends a new routine to the API to be created.
+ * A valid token is required.
+ */
+
+export async function createRoutine(token, routine) {
+  if (!token) {
+    throw new Error("You must signed in to create an routine");
+  }
+
+  const response = await fetch(API + "/routines", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(routine),
+  });
+  if (!response.ok) {
+    const result = await response.json();
+    throw Error(result.message);
+  }
+}

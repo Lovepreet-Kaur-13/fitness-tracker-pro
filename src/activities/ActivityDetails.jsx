@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteActivity, getactivity } from "../api/activities";
 import { useAuth } from "../auth/AuthContext";
-import { Link, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 export default function ActivityDetails() {
   const { token } = useAuth();

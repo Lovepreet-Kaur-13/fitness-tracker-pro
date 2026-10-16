@@ -1,4 +1,18 @@
+import { act, useEffect, useState } from "react";
+import { getActivities } from "../api/activities";
+
 export default function SetsForm() {
+  const [activities, setActivities] = useState([]);
+
+  const syncActivities = async () => {
+    const data = await getActivities();
+    setActivities(data);
+  };
+
+  useEffect(() => {
+    syncActivities();
+  }, []);
+
   return (
     <>
       <h2>Add a Set</h2>
@@ -6,8 +20,11 @@ export default function SetsForm() {
         <label>
           Activity
           <select name="activity">
-            <option value="yoga">Yoga</option>
-            <option value="jogin">Jogin</option>
+            {activities.map((activity) => (
+              <option key={activity.id} value={activity.id}>
+                {activity.name}
+              </option>
+            ))}
           </select>
         </label>
         <label>

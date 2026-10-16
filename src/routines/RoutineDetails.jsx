@@ -39,6 +39,16 @@ export default function RoutineDetails() {
       <h2>{routine.name}</h2>
       <p>{routine.goal}</p>
       <p>This routine is created by {routine.creatorName}</p>
+      <h3>Sets</h3>
+      {
+        <ul>
+          {routine.sets.map((set) => (
+            <li key={id}>
+              {set.name} × {set.count}
+            </li>
+          ))}
+        </ul>
+      }
       {token && <button onClick={tryDeleteRoutine}>Delete</button>}
       {error && <p role="alert">{error}</p>}
     </>
